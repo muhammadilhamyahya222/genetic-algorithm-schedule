@@ -1,0 +1,46 @@
+             <div class="row justify-content-center align-items-center">
+                @foreach($algoritma_proses[$i]['individuWithDetail'] as $individu)
+                <?php $individuIndex = $loop->index ?>
+                
+                <div class="col-md-6">
+                  <table class="table table-bordered table-hover text-center bg-light inisialisasiTable">
+                    <thead>
+                      <tr>
+                      <th scope="col" colspan="8">Individu {{ $loop->iteration }}</th>
+                      </tr>
+                      <tr  class="bg-greenTheme text-whiteTheme">
+                        <th scope="col" class="verticalTableHeader" rowspan="2"><p class="p-krom">Kromosom</p></th>
+                        <th scope="col" colspan="3">Gen 1</th>
+                        <th scope="col">Gen 2</th>
+                        <th scope="col" colspan="2">Gen 3</th>
+                        <th scope="col" rowspan="2" class="verticalTableHeader"><p class="p-detail">Detail</p></th>
+                      </tr>
+                      <tr>
+                        <th scope="col">Matkul</th>
+                        <th scope="col">Dosen</th>
+                        <th scope="col">Kelas</th>
+                        <th scope="col">Ruang</th>
+                        <th scope="col">Hari</th>
+                        <th scope="col">Jam</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @foreach($individu as $kromosom)
+                      <tr>
+                        <th scope="row">{{ $loop->iteration }}</th>
+                        <td>{{ $kromosom['kode_matkul'] }}</td>
+                        <td @if($kromosom['kode_dosen']['clash'] == 1) class="bg-maroon text-whiteTheme" @endif>{{ $kromosom['kode_dosen']['kode'] }}</td>
+                        <td>{{ $kromosom['kode_kelas'] }} - {{ $kromosom['perkuliahan_semester']['kode'] }}</td>
+                        <td @if($kromosom['nama_ruang']['clash'] == 1) class="bg-maroon text-whiteTheme" @endif>{{ ucwords($kromosom['nama_ruang']['kode']) }}</td>
+                        <td>{{ $kromosom['kode_hari'] }}</td>
+                        <td>{{ $kromosom['kode_jam'] }}</td>
+                        {{-- <td @if($kromosom['kode_jam']['clash'] == 1) class="bg-maroon text-whiteTheme" @endif>{{ $kromosom['kode_jam']['kode'] }}</td> --}}
+                        <td><i class="fas fa-info-circle text-detail" data-toggle="modal" data-target="#detail-{{ $i }}-{{ $individuIndex }}-{{ $kromosom['kode_kelas'] }}"></i></td>
+                      </tr>
+                      @endforeach
+                    </tbody>
+                  </table>
+                </div>
+                @endforeach
+
+              </div>
